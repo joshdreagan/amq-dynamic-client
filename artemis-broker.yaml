@@ -1,0 +1,29 @@
+apiVersion: broker.amq.io/v1beta1
+kind: ActiveMQArtemis
+metadata:
+  name: my-broker
+spec:
+  adminUser: "admin"
+  adminPassword: "admin"
+  deploymentPlan:
+    size: 1
+    resources:
+      limits:
+        cpu: 500m
+        memory: 1024Mi
+      requests:
+        cpu: 250m
+        memory: 512Mi
+    storage:
+      size: "4Gi"
+  console:
+    expose: true
+  acceptors:
+    - name: amqp
+      protocols: amqp
+      port: 5672
+    - name: amqps
+      protocols: amqp
+      port: 5671
+      sslEnabled: true
+      expose: true
